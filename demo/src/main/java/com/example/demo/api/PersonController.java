@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 
 @RequestMapping("api/v1/person")
@@ -37,4 +39,18 @@ public class PersonController {
 //        }
 //        return personService.getAllPerons();
 //    }
+
+
+    @GetMapping(path = "{id}")
+    public Person getPersonbyId(@PathVariable("id") UUID id){
+        return personService.getPersonById(id)
+                .orElse(null);
+    }
+
+    @DeleteMapping(path = "{id}")
+    public void deletePersonById(@PathVariable("id") UUID id ){
+        personService.deletePerson(id);
+    }
+
+
 }
